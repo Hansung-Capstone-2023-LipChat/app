@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "744504548990",
+    "project_id": "newlipchat",
+    "storage_bucket": "newlipchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744504548990:android:1801217b2a9ae1b7a6022f",
+        "android_client_info": {
+          "package_name": "com.example.newlipchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744504548990-3i2sg7n785oahuuhucdclr8lm2gvl4er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARjM9i9IIXTMl9Aixa5bZq64vRKuKBdZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744504548990-3i2sg7n785oahuuhucdclr8lm2gvl4er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
