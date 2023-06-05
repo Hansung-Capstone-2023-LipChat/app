@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mDbRef: DatabaseReference
 
     private lateinit var userList: ArrayList<User>
+    private lateinit var flagList: ArrayList<flag>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,20 +39,21 @@ class MainActivity : AppCompatActivity() {
         mDbRef = Firebase.database.reference
         //리스트 초기화
         userList = ArrayList()
+        flagList = ArrayList()
 
-        adapter = UserAdapter(this, userList)
+        adapter = UserAdapter(this, flagList)
         binding.userRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.userRecyclerView.adapter = adapter
 
         //db에서 사용자 정보 가져오기
-        mDbRef.child("user").addValueEventListener(object:ValueEventListener{
+        mDbRef.child("flag").addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for(postSnapshot in snapshot.children){
                     //유저정보
-                    val currentUser = postSnapshot.getValue(User::class.java)
+                    val currentFlag = postSnapshot.getValue(flag::class.java)
 
-                    if(mAuth.currentUser?.uid != currentUser?.uId){
-                        userList.add(currentUser!!)
+                    if(mAuth.currentUser?.uid != currentFlag?.current_face_id){
+                        flagList.add(currentFlag!!)
 
                     }
                 }

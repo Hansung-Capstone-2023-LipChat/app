@@ -1,6 +1,7 @@
 package com.example.newlipchat
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import org.w3c.dom.Text
 
-class MessageAdapter (private val context: Context, private val messageList: ArrayList<Message>):
+class MessageAdapter (private val context: Context, private val messageList: ArrayList<Result>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val receive = 1 //받는타입
@@ -40,10 +41,12 @@ class MessageAdapter (private val context: Context, private val messageList: Arr
         //보내는 데이터
         if(holder.javaClass == SendViewHolder::class.java){
             val viewHolder = holder as SendViewHolder
-            viewHolder.sendMessage.text = currentMessage.message
+//            Log.d("==================================================","=================================================")
+            viewHolder.sendMessage.text = currentMessage.text.toString()
         }else{ //받는 데이터
             val viewHolder = holder as ReceiveViewHolder
-            viewHolder.receiveMessage.text = currentMessage.message
+//            Log.d("==================================================","=================================================")
+            viewHolder.receiveMessage.text = currentMessage.text.toString()
 
         }
 
@@ -53,12 +56,13 @@ class MessageAdapter (private val context: Context, private val messageList: Arr
 
         //메시지값
         val currentMessage = messageList[position]
+        return receive
 
-        return if(FirebaseAuth.getInstance().currentUser?.uid.equals(currentMessage.sendId)){
-            send
-        }else {
-            receive
-        }
+//        return if(FirebaseAuth.getInstance().currentUser?.uid.equals(currentMessage.sendId)){
+//            send
+//        }else {
+//            receive
+//        }
     }
 
     //보내는 쪽

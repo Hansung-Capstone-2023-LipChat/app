@@ -2,10 +2,12 @@ package com.example.newlipchat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newlipchat.databinding.ActivityChatBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 import java.lang.reflect.GenericArrayType
 
 class ChatActivity : AppCompatActivity() {
@@ -22,7 +24,9 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var receiverRoom: String //받는 대화방
     private lateinit var senderRoom: String //보낸 대화방
 
-    private lateinit var messageList: ArrayList<Message>
+    private lateinit var face_id: String //받는 대화방
+
+    private lateinit var messageList: ArrayList<Result>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,8 @@ class ChatActivity : AppCompatActivity() {
 
 
         //넘어온 데이터 변수에 담기
+//        Log.d("==================================================","=================================================")
+        face_id = intent.getStringExtra("current_face_id").toString()
         receiverName = intent.getStringExtra("name").toString()
         receiverUid = intent.getStringExtra("uId").toString()
 
@@ -56,7 +62,7 @@ class ChatActivity : AppCompatActivity() {
         receiverRoom = senderUid + receiverUid
 
         //액션바에 상대방 이름 보여주기
-        supportActionBar?.title = receiverName
+        supportActionBar?.title = face_id
 
         //메세지 전송 버튼 이벤트, 전송버튼을 클릭하면 입력한메세지는 DB에 저장이 되고 저장된 메세지가 화면에 보여진다
         binding.sendBtn.setOnClickListener {
@@ -76,14 +82,18 @@ class ChatActivity : AppCompatActivity() {
         }
 
         //메시지 가져오기
-        mDbRef.child("chats").child(senderRoom).child("messages")
+        mDbRef.child("result").child(face_id)
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     messageList.clear()
 
                     for (postSnapshat in snapshot.children) {
-                        val message = postSnapshat.getValue(Message::class.java)
+//                        Log.d("asdf", postSnapshat.getValue(Result::class.java))
+                        Log.d("1","1=================================================")
+                        val message = postSnapshat.getValue(Result::class.java)
+                        Log.d("2","2=================================================")
                         messageList.add(message!!)
+                        Log.d("3","3=================================================")
                     }
                     //적용
                     messageAdapter.notifyDataSetChanged()

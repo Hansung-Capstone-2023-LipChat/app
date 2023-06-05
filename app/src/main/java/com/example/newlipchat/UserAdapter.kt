@@ -4,13 +4,14 @@ package com.example.newlipchat
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class UserAdapter(private val context: Context, private val userList: ArrayList<User>):
+class UserAdapter(private val context: Context, private val flagList: ArrayList<flag>):
   RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
     //화면설정
@@ -21,23 +22,27 @@ class UserAdapter(private val context: Context, private val userList: ArrayList<
     }
 
     override fun getItemCount(): Int {
-        return userList.size
+        return flagList.size
     }
 
     //데이터설정
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val currentUser = userList[position]
+        val currentFlag = flagList[position]
+//        val currentFlag = flagList[position]
 
         //화면에 데이터 보여주기
-        holder.nameText.text = currentUser.name
+        holder.nameText.text = currentFlag.current_face_id
 
         //아이템 클릭 이벤트, 누르면 채팅방으로 이동
         holder.itemView.setOnClickListener{
             val intent = Intent(context, ChatActivity::class.java)
 
             //넘길데이터
-            intent.putExtra("name", currentUser.name)
-            intent.putExtra("uId", currentUser.uId)
+
+            intent.putExtra("current_face_id", currentFlag.current_face_id)
+//            intent.putExtra("name", currentUser.name)
+
+//            intent.putExtra("uId", currentUser.uId)
 
             context.startActivity(intent)
         }
