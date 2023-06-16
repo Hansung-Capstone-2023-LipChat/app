@@ -83,17 +83,17 @@ class ChatActivity : AppCompatActivity() {
 
         //메시지 가져오기
         mDbRef.child("result").child(face_id)
-            .addValueEventListener(object: ValueEventListener {
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     messageList.clear()
 
                     for (postSnapshat in snapshot.children) {
-//                        Log.d("asdf", postSnapshat.getValue(Result::class.java))
-                        Log.d("1","1=================================================")
+//
+                        Log.d("1", "1=================================================")
                         val message = postSnapshat.getValue(Result::class.java)
-                        Log.d("2","2=================================================")
+                        Log.d("2", "2=================================================")
                         messageList.add(message!!)
-                        Log.d("3","3=================================================")
+                        Log.d("3", "3=================================================")
                     }
                     //적용
                     messageAdapter.notifyDataSetChanged()
@@ -104,7 +104,7 @@ class ChatActivity : AppCompatActivity() {
 
                 }
 
-                })
+            })
 
 
     }
