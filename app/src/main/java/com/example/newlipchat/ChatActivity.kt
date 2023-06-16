@@ -65,6 +65,8 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.title = face_id
 
         //메세지 전송 버튼 이벤트, 전송버튼을 클릭하면 입력한메세지는 DB에 저장이 되고 저장된 메세지가 화면에 보여진다
+        //
+
         binding.sendBtn.setOnClickListener {
             val message = binding.messageEdit.text.toString()
             val messageObject = Message(message, senderUid)
